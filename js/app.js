@@ -43,13 +43,14 @@ window.onload = function() {
     var x = [1, 2, 3, 4, 5];
     var N = x.length;
     var G = [0, 0, 0, 0, 0];
+    var Y = [0, 0, 0, 0, 0];
 
     console.log(N);
 
-    for (var u = 0; u < N; u++) {
-        for (var n = 0; n < N; n++) {
+    for (var u = 0; u < N; ++u) {
+        for (var n = 0; n < N; ++n) {
             var w = -2 * 3.1415 * u * n / N;
-            var c = math.complex(Math.sin(w), Math.cos(w))
+            var c = math.complex(Math.cos(w), Math.sin(w))
                 //console.log(typeof(c.im * x[n] / N));
                 //const c = new Complex(Math.sin(w), Math.cos(w)); //Math.complex(Math.sin(w), Math.cos(w)) //new Complex(sin(w), cos(w));
                 //G[u] = parseInt(G[u]) + (parseInt(c.re) * c.im * parseInt(x[n] / N));
@@ -60,7 +61,20 @@ window.onload = function() {
             //console.log('G[u]= ', G[u]);
         }
     }
+
+
+    for (var n = 0; n < N; ++n) {
+        for (var u = 0; u < N; ++u) {
+            var w = 2 * 3.1415 * u * n / N;
+            var c = math.complex(Math.cos(w), Math.sin(w))
+            Y[n] += (G[u] * c.re); // c.im 
+            console.log(G[u]);
+        }
+    }
+
+    console.log(x);
     console.log(G);
+    console.log(Y);
 
     ctx.putImageData(imgData, 0, 0);
 
